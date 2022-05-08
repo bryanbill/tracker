@@ -7,6 +7,8 @@ public interface IUser {
 
     User getUser(String username);
 
+    User getUserById(int id);
+
     boolean deleteUser(String username);
 
     boolean updateUser(User user);
