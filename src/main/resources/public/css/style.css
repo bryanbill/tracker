@@ -1,0 +1,19 @@
+/*Import Font Nunito*/
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+html,body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    color: #000;
+    background-color: #fff;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+body{
+    min-height: 100%;
+}
+.w-30{
+    width: 30% !important;
+}
