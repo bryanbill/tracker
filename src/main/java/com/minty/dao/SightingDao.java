@@ -44,7 +44,7 @@ public class SightingDao implements ISightings {
     public boolean createSighting(Connection conn, Sightings sighting) {
         try {
             return conn.createQuery("INSERT INTO sightings (loc, animalid, rangerid) " +
-                            "VALUES (:loc, :animalid, :rangerid)")
+                            "VALUES (:loc, :animalId, :rangerId)")
                     .bind(sighting)
                     .executeUpdate().getResult() > 0;
         } catch (Exception e) {
@@ -59,8 +59,9 @@ public class SightingDao implements ISightings {
     @Override
     public boolean updateSighting(Connection conn, Sightings sighting, int id) {
         try {
-            return conn.createQuery("UPDATE sightings SET loc = :loc, animalid = :animalid," +
-                            " rangerid = :rangerid WHERE id = :id")
+            System.out.println(sighting.getAnimalId());
+            return conn.createQuery("UPDATE sightings SET loc = :loc, animalid = :animalId," +
+                            " rangerid = :rangerId WHERE id = :id")
                     .addParameter("id", id)
                     .addParameter("loc", sighting.getLoc())
                     .addParameter("animalid", sighting.getAnimalId())
