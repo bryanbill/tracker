@@ -79,6 +79,7 @@ public class Router extends RouterUtil {
             String password = req.queryParams("password");
             User user = userDao.login(connection, username, password);
             req.session().attribute("user", user);
+            res.redirect("/");
             return "Logged in";
         });
         post("/new/animal", (req, res) -> {
@@ -91,6 +92,7 @@ public class Router extends RouterUtil {
             animalsDao.createAnimal(connection,
                     new Animals(animalName, animalType, age, health, user.getId(),
                             new Date()));
+            res.redirect("/animals");
             return "New Animal";
         });
 
@@ -103,7 +105,7 @@ public class Router extends RouterUtil {
             sightingsDao.createSighting(connection,
                     new Sightings(sightingLocation,
                             animalId, user.getId()));
-
+            res.redirect("/sightings");
             return "New Sighting";
         });
 
