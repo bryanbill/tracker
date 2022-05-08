@@ -14,7 +14,16 @@ public class UserDao implements IUser {
      */
     @Override
     public User login(Connection conn, String username, String password) {
-        return null;
+        try {
+            return conn.createQuery("SELECT * FROM users " +
+                            "WHERE username = :username AND password = :password")
+                    .addParameter("username", username)
+                    .addParameter("password", password)
+                    .executeAndFetchFirst(User.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -24,8 +33,16 @@ public class UserDao implements IUser {
      */
     @Override
     public User getUser(Connection conn, String username) {
-        return null;
+        try {
+            return conn.createQuery("SELECT * FROM users " +
+                            "WHERE username = :username")
+                    .addParameter("username", username)
+                    .executeAndFetchFirst(User.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     /**
      * @param conn
@@ -34,7 +51,14 @@ public class UserDao implements IUser {
      */
     @Override
     public User getUserById(Connection conn, int id) {
-        return null;
+        try {
+            return conn.createQuery("SELECT * FROM users " +
+                            "WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(User.class);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -44,7 +68,14 @@ public class UserDao implements IUser {
      */
     @Override
     public boolean deleteUser(Connection conn, String username) {
-        return false;
+        try {
+            return conn.createQuery("DELETE FROM users WHERE username = :username")
+                    .addParameter("username", username)
+                    .executeUpdate().getResult() > 0;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -54,6 +85,13 @@ public class UserDao implements IUser {
      */
     @Override
     public boolean updateUser(Connection conn, User user) {
-        return false;
+        try {
+            return conn.createQuery("UPDATE users SET fullname = :fullName WHERE username = :username")
+                    .bind(user)
+                    .executeUpdate()
+                    .getResult() > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

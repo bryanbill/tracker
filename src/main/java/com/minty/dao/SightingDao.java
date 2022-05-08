@@ -59,13 +59,13 @@ public class SightingDao implements ISightings {
     @Override
     public boolean updateSighting(Connection conn, Sightings sighting, int id) {
         try {
-            System.out.println(sighting.getAnimalId());
+
             return conn.createQuery("UPDATE sightings SET loc = :loc, animalid = :animalId," +
                             " rangerid = :rangerId WHERE id = :id")
                     .addParameter("id", id)
                     .addParameter("loc", sighting.getLoc())
-                    .addParameter("animalid", sighting.getAnimalId())
-                    .addParameter("rangerid", sighting.getRangerId())
+                    .addParameter("animalId", sighting.getAnimalId())
+                    .addParameter("rangerId", sighting.getRangerId())
                     .executeUpdate()
                     .getResult() > 0;
         } catch (Exception e) {

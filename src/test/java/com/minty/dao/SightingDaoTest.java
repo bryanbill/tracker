@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -72,9 +73,9 @@ class SightingDaoTest {
         try {
             SightingDao sightingDao = new SightingDao();
             boolean ts = sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1));
-//            boolean res = sightingDao.updateSighting(conn,
-//                    new Sightings("Jumbo Hills", 1, 1), 1);
-            assertTrue(ts );
+            boolean res = sightingDao.updateSighting(conn,
+                    new Sightings("Jumbo Hills", 1, 1), 1);
+            assertTrue(ts && res);
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
         }
