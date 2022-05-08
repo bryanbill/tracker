@@ -3,6 +3,11 @@ package com.minty.database;
 import org.sql2o.Connection;
 
 public class Seeder {
+
+    /**
+     * Seeds the database with the default data.
+     * @param conn
+     */
     public static void seed(Connection conn) {
         try {
             conn.createQuery("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, " +
@@ -20,6 +25,11 @@ public class Seeder {
             throw new RuntimeException("Cannot seed database.", e);
         }
     }
+
+    /**
+     * Clears the database.
+     * @param conn
+     */
 
     public static void clearDb(Connection conn) {
         try {
