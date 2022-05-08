@@ -63,6 +63,25 @@ public class UserDao implements IUser {
 
     /**
      * @param conn
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean createUser(Connection conn, User user) {
+        try {
+            return conn.createQuery("INSERT INTO users (username, password, " +
+                    "fullname, company) " +
+                    "VALUES (:username, :password, :fullName, :company)")
+                    .bind(user)
+                    .executeUpdate()
+                    .getResult() > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * @param conn
      * @param username
      * @return
      */

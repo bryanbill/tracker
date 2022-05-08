@@ -11,6 +11,8 @@ public interface IUser {
 
     User getUserById(Connection conn, int id);
 
+    boolean createUser(Connection conn, User user);
+
     boolean deleteUser(Connection conn, String username);
 
     boolean updateUser(Connection conn, User user);
