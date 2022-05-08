@@ -11,7 +11,7 @@ public class RouterUtil {
         // Check if the user is loggedIn in
         if (request.session().attribute("user") == null) {
             // Redirect to login page
-            response.redirect("/login");
+           // response.redirect("/login");
         }
     }
 }

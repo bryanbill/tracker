@@ -25,8 +25,8 @@ public class Router extends RouterUtil {
         staticFileLocation("/public");
         get("/", (req, res) -> {
             checkLoggedIn(req, res);
-            return "Hello World";
-        });
+            return new ModelAndView(null, "dashboard.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/login", (req, res) -> {
             return new ModelAndView(null, "login.hbs");
