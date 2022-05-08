@@ -1,0 +1,34 @@
+{{#partial "title"}}
+    Login
+{{/partial}}
+{{#partial "content"}}
+
+    <div class="d-flex justify-content-center align-items-center h-100 w-100">
+        <div class="card w-30">
+            <div class="d-flex w-100 justify-content-center">
+                <img src="/assets/logo.png" class="w-50" alt="...">
+            </div>
+            <article class="card-body">
+                <a href="/register" class="float-right btn btn-outline-primary">Sign up</a>
+                <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <label>Your Username</label>
+                        <input name="username" class="form-control" placeholder="doe" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Password</label>
+                        <input name="password" class="form-control" placeholder="*****" type="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login</button>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </div>
+
+{{/partial}}
+
+{{> layout.hbs}}

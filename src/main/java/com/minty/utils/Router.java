@@ -7,6 +7,8 @@ import com.minty.models.Animals;
 import com.minty.models.Sightings;
 import com.minty.models.User;
 import org.sql2o.Connection;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.Date;
 
@@ -27,15 +29,16 @@ public class Router extends RouterUtil {
         });
 
         get("/login", (req, res) -> {
-            return "Login";
-        });
+            return new ModelAndView(null, "login.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/register", (req, res) -> {
-            return "Register";
-        });
+            return new ModelAndView(null, "register.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/logout", (req, res) -> {
             req.session().invalidate();
+            res.redirect("/login");
             return "Logged out";
         });
 
@@ -80,6 +83,17 @@ public class Router extends RouterUtil {
             User user = userDao.login(connection, username, password);
             req.session().attribute("user", user);
             res.redirect("/");
+            return "Logged in";
+        });
+
+        post("/register", (req, res) -> {
+            String username = req.queryParams("username");
+            String password = req.queryParams("password");
+            String company = req.queryParams("company");
+            String fullName = req.queryParams("fullname");
+            userDao.createUser(connection,
+                    new User(username, fullName, company, password));
+            res.redirect("/login");
             return "Logged in";
         });
         post("/new/animal", (req, res) -> {
