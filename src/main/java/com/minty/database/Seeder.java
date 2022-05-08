@@ -16,7 +16,7 @@ public class Seeder {
                     .executeUpdate();
             conn.createQuery("CREATE TABLE IF NOT EXISTS animals (id SERIAL PRIMARY KEY, " +
                     "animalname VARCHAR(255) UNIQUE, " +
-                    "rangerid VARCHAR(255), type TEXT, " +
+                    "animaltype TEXT, " +
                     "age TEXT, health VARCHAR(255))").executeUpdate();
             conn.createQuery("CREATE TABLE IF NOT EXISTS sightings " +
                             "(id SERIAL PRIMARY KEY, loc VARCHAR(255), animalid INTEGER, rangerid INTEGER)")
