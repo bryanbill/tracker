@@ -3,6 +3,11 @@ package com.minty.database;
 import org.sql2o.Connection;
 
 public class Seeder {
+
+    /**
+     * Seeds the database with the default data.
+     * @param conn
+     */
     public static void seed(Connection conn) {
         try {
             conn.createQuery("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, " +
@@ -11,7 +16,7 @@ public class Seeder {
                     .executeUpdate();
             conn.createQuery("CREATE TABLE IF NOT EXISTS animals (id SERIAL PRIMARY KEY, " +
                     "animalname VARCHAR(255) UNIQUE, " +
-                    "rangerid VARCHAR(255), type TEXT, " +
+                    "animaltype TEXT, " +
                     "age TEXT, health VARCHAR(255))").executeUpdate();
             conn.createQuery("CREATE TABLE IF NOT EXISTS sightings " +
                             "(id SERIAL PRIMARY KEY, loc VARCHAR(255), animalid INTEGER, rangerid INTEGER)")
@@ -20,6 +25,11 @@ public class Seeder {
             throw new RuntimeException("Cannot seed database.", e);
         }
     }
+
+    /**
+     * Clears the database.
+     * @param conn
+     */
 
     public static void clearDb(Connection conn) {
         try {
