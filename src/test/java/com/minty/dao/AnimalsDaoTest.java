@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AnimalsDaoTest {
@@ -35,7 +37,7 @@ class AnimalsDaoTest {
             AnimalsDao animalsDao = new AnimalsDao();
             assertTrue(animalsDao.createAnimal(conn,
                     new Animals("Hill Billy", "Rare",
-                            "Young", "Healthy")));
+                            "Young", "Healthy", 1, new Date())));
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
         }
@@ -47,9 +49,9 @@ class AnimalsDaoTest {
             AnimalsDao animalsDao = new AnimalsDao();
             animalsDao.createAnimal(conn,
                     new Animals("Hill Billy", "Rare",
-                            "Young", "Healthy"));
+                            "Young", "Healthy", 1, new Date()));
             animalsDao.createAnimal(conn, new Animals("DuckBilled Platypus",
-                    "Rare", "Old", "sickly"));
+                    "Rare", "Old", "sickly", 1, new Date()));
             assertTrue(animalsDao.getAnimals(conn).size() == 2);
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
@@ -62,7 +64,7 @@ class AnimalsDaoTest {
             AnimalsDao animalsDao = new AnimalsDao();
             assertTrue(animalsDao.createAnimal(conn,
                     new Animals("Hill Billy", "Rare",
-                            "Young", "Healthy")));
+                            "Young", "Healthy", 1, new Date())));
             Animals animal = animalsDao.getAnimal(conn, 1);
             assertTrue(animalsDao.updateAnimal(conn, animal));
         } catch (Exception e) {
@@ -76,7 +78,7 @@ class AnimalsDaoTest {
             AnimalsDao animalsDao = new AnimalsDao();
             animalsDao.createAnimal(conn,
                     new Animals("Hill Billy", "Rare",
-                            "Young", "Healthy"));
+                            "Young", "Healthy", 1, new Date()));
             assertTrue(animalsDao.deleteAnimal(conn, 1));
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
