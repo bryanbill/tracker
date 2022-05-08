@@ -1,15 +1,17 @@
 package com.minty.interfaces;
 
 import com.minty.models.User;
+import org.sql2o.Connection;
+
 
 public interface IUser {
-    User login(String username, String password);
+    User login(Connection conn, String username, String password);
 
-    User getUser(String username);
+    User getUser(Connection conn, String username);
 
-    User getUserById(int id);
+    User getUserById(Connection conn, int id);
 
-    boolean deleteUser(String username);
+    boolean deleteUser(Connection conn, String username);
 
-    boolean updateUser(User user);
+    boolean updateUser(Connection conn, User user);
 }
