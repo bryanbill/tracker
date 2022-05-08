@@ -26,31 +26,38 @@ public class Router extends AuthUtil {
         });
 
         get("/new/animal", (req, res) -> {
+            checkLoggedIn(req, res);
             return "New Animal";
         });
 
         get("/new/sighting", (req, res) -> {
+            checkLoggedIn(req, res);
             return "New Sighting";
         });
 
         get("/ranger/:id", (req, res) -> {
+            checkLoggedIn(req, res);
             return "Ranger";
         });
 
         get("/animal/:id", (req, res) -> {
+            checkLoggedIn(req, res);
             return "Animal";
         });
 
-        get("/sighting/:id", (req,res)->{
+        get("/sighting/:id", (req, res) -> {
+            checkLoggedIn(req, res);
             return "Sighting";
         });
 
 
         post("/new/animal", (req, res) -> {
+            checkLoggedIn(req, res);
             return "New Animal";
         });
 
         post("/new/sighting", (req, res) -> {
+            checkLoggedIn(req, res);
             return "New Sighting";
         });
 
