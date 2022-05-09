@@ -3,10 +3,10 @@ package com.minty.models;
 public class Sightings {
     private int id;
     private String loc;
-    private Integer animalId;
-    private Integer rangerId;
+    private String animalId;
+    private String rangerId;
 
-    public Sightings(String loc, Integer animalId, Integer rangerId) {
+    public Sightings(String loc, String animalId, String rangerId) {
         this.loc = loc;
         this.animalId = animalId;
         this.rangerId = rangerId;
@@ -20,11 +20,11 @@ public class Sightings {
         return loc;
     }
 
-    public Integer getAnimalId() {
+    public String getAnimalId() {
         return animalId;
     }
 
-    public Integer getRangerId() {
+    public String getRangerId() {
         return rangerId;
     }
 }

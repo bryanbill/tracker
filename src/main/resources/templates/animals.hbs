@@ -1,0 +1,84 @@
+{{#partial "username"}}
+    {{user.fullName}}!
+{{/partial}}
+
+{{#partial "dashboard"}}
+
+    <div class="my-4">
+        <h4>Animals</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Animals</h5>
+                    <p class="card-text">{{totalAnimals}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Endangered</h5>
+                    {{#if endangered}}{{endangered}}{{else}}0{{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Ratio</h5>
+                    {{#if ratio}}{{ratio}}{{else}}0{{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-4 d-flex w-100 justify-content-between">
+        <h4>Recents - Animals</h4>
+        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#animalCreate">Add Animal</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Health</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#if animals}}
+                        {{#each animals}}
+                            <tr>
+                                <td >{{id}}</td>
+                                <td>{{animalName}}</td>
+                                <td>{{animalType}}</td>
+                                <td>{{age}}</td>
+                                <td>{{health}}</td>
+                                <td>
+                                    <button class="btn btn-outline-danger" onclick="delRoute('/delete/animal/{{id}}')">Delete</button>
+                                </td>
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="6">No animals found</td>
+                        </tr>
+                    {{/if}}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+{{/partial}}
+{{> dashboard.hbs}}

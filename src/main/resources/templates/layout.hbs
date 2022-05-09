@@ -1,31 +1,116 @@
 {{#block "header"}}
-
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <title>{{#block "title"}}Home{{/block}}
         </title>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/style.css"/>
     </head>
     <body>
 {{/block}}
 
-{{#block "nav"}}
-
-{{/block}}
 <!-- begin inner template-->
 <div class="h-100 w-100">
     {{#block "content"}}
     {{/block}}
+    <div class="modal fade" id="animalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Animal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/new/animal" method="post">
+                        <div class="form-group">
+                            <label for="animalName">Animal Name</label>
+                            <input type="text" class="form-control" name="animalName" id="animalName"
+                                   placeholder="Enter Animal Name" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="animalType">Animal Type</label>
+                            <select type="text" class="form-control" name="animalType" id="animalType"
+                                    placeholder="Enter Animal Type" required>
+                                <option value="endangered">Endangered</option>
+                                <option value="threatened">Threatened</option>
+                                <option value="vulnerable">Vulnerable</option>
+                                <option value="nearby">Nearby</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" class="form-control" name="age" id="age" placeholder="Enter Age"
+                                   required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="health">Health</label>
+                            <input type="text" class="form-control" name="health" id="health" placeholder="Enter Health"
+                                   required/>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Save changes</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sightingCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Sighting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/new/sighting" method="post">
+                        <div class="form-group">
+                            <label for="name">Animal Name</label>
+                            <select type="text" class="form-control" name="animalName" id="animalName" placeholder="Enter Animal Name" required>
+                                {{#if animals}}
+                                    {{#each animals}}
+                                        <option value="{{animalName}}">{{animalName}}</option>
+                                    {{/each}}
+                                {{else}}
+                                    <option value="">No Animals</option>
+                                {{/if}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="Enter Location" required/>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Save</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
 <!-- end inner template-->
 {{#block "footer"}}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <script src="/js/main.js"></script>
     </body>
     </html>

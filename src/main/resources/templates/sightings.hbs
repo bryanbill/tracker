@@ -1,0 +1,101 @@
+{{#partial "username"}}
+    {{user.fullName}}!
+{{/partial}}
+{{#partial "dashboard"}}
+    <div class="my-4">
+        <h4>Sightings</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Sightings</h5>
+                    <p class="card-text">{{totalSightings}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-4 d-flex w-100 justify-content-between">
+        <h4>Recents - Sightings</h4>
+        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#sighting1Create">Add Sighting</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Animal Name</th>
+                        <th scope="col">Ranger</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#if sightings}}
+                        {{#each sightings}}
+                            <tr>
+                                <td >{{id}}</td>
+                                <td>{{loc}}</td>
+                                <td>{{animalId}}</td>
+                                <td>{{rangerId}}</td>
+                                <td>
+                                    <button class="btn btn-outline-danger" onclick="delRoute('/delete/sighting/{{id}}')">Delete</button>
+                                </td>
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No sighting found</td>
+                        </tr>
+                    {{/if}}
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sighting1Create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Sighting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/new/sighting" method="post">
+                        <div class="form-group">
+                            <label for="name">Animal Name</label>
+                            <select type="text" class="form-control" name="animalName" id="animalName" placeholder="Enter Animal Name" required>
+                                {{#if animals}}
+                                    {{#each animals}}
+                                        <option value="{{animalName}}">{{animalName}}</option>
+                                    {{/each}}
+                                {{else}}
+                                    <option value="">No Animals</option>
+                                {{/if}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="Enter Location" required/>
+                        </div>
+                        <button type="submit" class="btn btn-dark" >Save</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{{/partial}}
+{{> dashboard.hbs}}

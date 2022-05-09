@@ -1,0 +1,109 @@
+{{#partial "username"}}
+    {{user.fullName}}!
+{{/partial}}
+{{#partial "dashboard"}}
+    <div class="my-4">
+        <h4>Statistics</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Animals</h5>
+                    <p class="card-text">{{totalAnimals}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Sightings</h5>
+                    <p class="card-text">{{totalSightings}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-4 d-flex w-100 justify-content-between">
+        <h4>Recents - Animals</h4>
+        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#animalCreate">Add Animal</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Health</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#if animals}}
+                        {{#each animals}}
+                            <tr>
+                                <th scope="row">{{id}}</th>
+                                <td>{{animalName}}</td>
+                                <td>{{animalType}}</td>
+                                <td>{{age}}</td>
+                                <td>{{health}}</td>
+
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No animals found</td>
+                        </tr>
+                    {{/if}}
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="my-4 d-flex w-100 justify-content-between">
+        <h4>Recents - Sightings</h4>
+        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#sightingCreate">Add Sighting</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Animal Name</th>
+                        <th scope="col">Ranger Name</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#if sightings}}
+                        {{#each sightings}}
+                            <tr>
+                                <th scope="row">{{id}}</th>
+                                <td>{{loc}}</td>
+                                <td>{{animalId}}</td>
+                                <td>{{rangerId}}</td>
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No sightings found</td>
+                        </tr>
+                    {{/if}}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> dashboard.hbs}}

@@ -37,7 +37,7 @@ class SightingDaoTest {
     void getSighting() {
         try {
             SightingDao sightingDao = new SightingDao();
-            assertTrue(sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1)));
+            assertTrue(sightingDao.createSighting(conn, new Sightings("Hilly Hills", "Hill Billy", "Juma")));
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
         }
@@ -47,8 +47,8 @@ class SightingDaoTest {
     void getSightings() {
         try {
             SightingDao sightingDao = new SightingDao();
-            sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1));
-            sightingDao.createSighting(conn, new Sightings("Hilly Hills", 2, 2));
+            sightingDao.createSighting(conn, new Sightings("Hilly Hills", "Hill Billy", "Juma"));
+            sightingDao.createSighting(conn, new Sightings("Hilly Hills", "2", "2"));
             List<Sightings> sightings = sightingDao.getSightings(conn);
             assertEquals(2, sightings.size());
         } catch (Exception e) {
@@ -60,7 +60,7 @@ class SightingDaoTest {
     void createSighting() {
         try {
             SightingDao sightingDao = new SightingDao();
-            sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1));
+            sightingDao.createSighting(conn, new Sightings("Hilly Hills", "Hill Billy", "Juma"));
             Sightings sighting = sightingDao.getSighting(conn, 1);
             assertEquals(1, sighting.getId());
         } catch (Exception e) {
@@ -72,9 +72,9 @@ class SightingDaoTest {
     void updateSighting() {
         try {
             SightingDao sightingDao = new SightingDao();
-            boolean ts = sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1));
+            boolean ts = sightingDao.createSighting(conn, new Sightings("Hilly Hills", "Hill Billy", "Juma"));
             boolean res = sightingDao.updateSighting(conn,
-                    new Sightings("Jumbo Hills", 1, 1), 1);
+                    new Sightings("Jumbo Hills", "Hill Billy", "Juma"), 1);
             assertTrue(ts && res);
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);
@@ -85,7 +85,7 @@ class SightingDaoTest {
     void deleteSighting() {
         try {
             SightingDao sightingDao = new SightingDao();
-            sightingDao.createSighting(conn, new Sightings("Hilly Hills", 1, 1));
+            sightingDao.createSighting(conn, new Sightings("Hilly Hills", "Hill Billy", "Juma"));
             assertTrue(sightingDao.deleteSighting(conn, 1));
         } catch (Exception e) {
             throw new RuntimeException("Test Error", e);

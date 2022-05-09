@@ -7,6 +7,8 @@ public class User {
     private String company;
     private String password;
 
+    private static User currentUser;
+
     public User(String username, String fullName, String company, String password) {
         this.username = username;
         this.fullName = fullName;
@@ -33,5 +35,13 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User cs) {
+        currentUser = cs;
     }
 }
