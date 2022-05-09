@@ -19,7 +19,7 @@
 
     <div class="my-4 d-flex w-100 justify-content-between">
         <h4>Recents - Sightings</h4>
-        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#sightingCreate">Add Sighting</button>
+        <button class="btn btn btn-outline-dark" data-toggle="modal" data-target="#sighting1Create">Add Sighting</button>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -43,7 +43,7 @@
                                 <td>{{animalId}}</td>
                                 <td>{{rangerId}}</td>
                                 <td>
-                                    <button class="btn btn-outline-danger">Delete</button>
+                                    <button class="btn btn-outline-danger" onclick="delRoute('/delete/sighting/{{id}}')">Delete</button>
                                 </td>
                             </tr>
 
@@ -61,6 +61,42 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="sighting1Create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Sighting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/new/sighting" method="post">
+                        <div class="form-group">
+                            <label for="name">Animal Name</label>
+                            <select type="text" class="form-control" name="animalName" id="animalName" placeholder="Enter Animal Name" required>
+                                {{#if animals}}
+                                    {{#each animals}}
+                                        <option value="{{animalName}}">{{animalName}}</option>
+                                    {{/each}}
+                                {{else}}
+                                    <option value="">No Animals</option>
+                                {{/if}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="Enter Location" required/>
+                        </div>
+                        <button type="submit" class="btn btn-dark" >Save</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 {{/partial}}
 {{> dashboard.hbs}}

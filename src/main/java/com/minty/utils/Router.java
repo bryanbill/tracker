@@ -52,6 +52,8 @@ public class Router extends RouterUtil {
         get("/sightings", (req, res) -> {
             checkLoggedIn(req, res);
             Map<String, Object> model = new HashMap<>();
+            List<Animals> animals = animalsDao.getAnimals(connection);
+            model.put("animals", animals);
             model.put("sightings", sightingsDao.getSightings(connection));
             model.put("user", User.getCurrentUser());
             model.put("totalSightings", sightingsDao.getSightings(connection).size());
