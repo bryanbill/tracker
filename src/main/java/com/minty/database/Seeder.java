@@ -19,7 +19,7 @@ public class Seeder {
                     "animaltype TEXT, " +
                     "age TEXT, health VARCHAR(255))").executeUpdate();
             conn.createQuery("CREATE TABLE IF NOT EXISTS sightings " +
-                            "(id SERIAL PRIMARY KEY, loc VARCHAR(255), animalid INTEGER, rangerid INTEGER)")
+                            "(id SERIAL PRIMARY KEY, loc VARCHAR(255), animalid VARCHAR(255), rangerid VARCHAR(255))")
                     .executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException("Cannot seed database.", e);

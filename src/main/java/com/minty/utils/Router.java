@@ -34,6 +34,8 @@ public class Router extends RouterUtil {
             model.put("sightings", sightings);
             model.put("animals", animals);
             model.put("user", User.getCurrentUser());
+            model.put("totalAnimals", animals.size());
+            model.put("totalSightings", sightings.size());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -56,14 +58,27 @@ public class Router extends RouterUtil {
             Map<String, Object> model = new HashMap<>();
             model.put("sightings", sightingsDao.getSightings(connection));
             model.put("user", User.getCurrentUser());
+            model.put("totalSightings", sightingsDao.getSightings(connection).size());
             return new ModelAndView(model, "sightings.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/animals", (req, res) -> {
             checkLoggedIn(req, res);
             Map<String, Object> model = new HashMap<>();
-            model.put("animals", animalsDao.getAnimals(connection));
+            List<Animals> animals = animalsDao.getAnimals(connection);
+            model.put("animals", animals);
             model.put("user", User.getCurrentUser());
+            model.put("totalAnimals", animals.size());
+            if (animals.size() > 0) {
+                // Filter animals where type is "endangered"
+                List<Animals> _s = null;
+                for (Animals a : animals) {
+                    if (!a.getAnimalType().equals("endangered"))
+                        _s.add(a);
+                }
+                model.put("endangered", _s.size());
+                model.put("ratio", (animals.size() / _s.size()) * 100);
+            }
             return new ModelAndView(model, "animals.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -122,7 +137,7 @@ public class Router extends RouterUtil {
             String animalType = req.queryParams("animalType");
             String age = req.queryParams("age");
             String health = req.queryParams("health");
-            User user = (User) req.session().attribute("user");
+            User user =  req.session().attribute("user");
             animalsDao.createAnimal(connection,
                     new Animals(animalName, animalType, age, health, user.getId(),
                             new Date()));
@@ -132,13 +147,13 @@ public class Router extends RouterUtil {
 
         post("/new/sighting", (req, res) -> {
             checkLoggedIn(req, res);
-            int animalId = Integer.parseInt(req.queryParams("animalId"));
+            String animalId =req.queryParams("animalId");
             String sightingLocation = req.queryParams("sightingLocation");
             User user = (User) req.session().attribute("user");
 
             sightingsDao.createSighting(connection,
                     new Sightings(sightingLocation,
-                            animalId, user.getId()));
+                            animalId, user.getFullName()));
             res.redirect("/sightings");
             return "New Sighting";
         });
