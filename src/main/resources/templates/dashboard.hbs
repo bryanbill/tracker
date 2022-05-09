@@ -3,16 +3,60 @@
 {{/partial}}
 {{#partial "content"}}
     <div class="row h-100 w-100">
-        <div class="col-md-2 h-100 w-100 sidebar text-center text-dark">
-            <div class="d-flex flex-column w-100 align-items-center justify-content-center">
+        <div class="col-md-2 h-100 w-100 sidebar text-dark">
+            <div class="d-flex flex-column text-center w-100 align-items-center justify-content-center">
                 <img src="/assets/logo.png" class="w-50" alt="...">
-
                 <span class="navbar-brand">Tracker</span>
                 <hr class="text-dark">
             </div>
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark active" aria-current="page" href="#">
+                            <span data-feather="home">
+<!--                                <i class="fa fa-home"></i>-->
+                            </span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/animals">
+                            <span data-feather="animals">
+<!--                                <i class="fa fa-paw"></i>-->
+                            </span>
+                            Animals
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">
+                            <span data-feather="sightings">
+<!--                                <i class="fa fa-map-marker"></i>-->
+                            </span>
+                            Sightings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">
+                            <span data-feather="users">
+                            </span>
+                            Rangers
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-10 w-100">
+            <div class="my-1 d-flex w-100 h-5 align-items-center  justify-content-between">
+                <div class="fs-3">
+                    <h3>Hello Bryan!</h3>
+                </div>
+                <div class="d-flex w-10">
+                    <a href="/logout" class="btn btn-outline-dark">Logout</a>
+                </div>
+            </div>
+            {{#block "dashboard"}}
 
+            {{/block}}
         </div>
     </div>
 {{/partial}}

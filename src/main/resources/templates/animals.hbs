@@ -1,7 +1,7 @@
 {{#partial "dashboard"}}
 
     <div class="my-4">
-        <h4>Statistics</h4>
+        <h4>Animals</h4>
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -15,7 +15,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Total Sightings</h5>
+                    <h5 class="card-title">Endangered</h5>
                     <p class="card-text">45K</p>
                 </div>
             </div>
@@ -23,8 +23,8 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Total Rangers</h5>
-                    <p class="card-text">45K</p>
+                    <h5 class="card-title">Ratio</h5>
+                    <p class="card-text">34%</p>
                 </div>
             </div>
         </div>
@@ -45,6 +45,7 @@
                         <th scope="col">Type</th>
                         <th scope="col">Age</th>
                         <th scope="col">Health</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,14 +55,12 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>@fat</td>
+                        <td>
+                            <button class="btn btn-outline-success">Edit</button>
+                            <button class="btn btn-outline-danger">Delete</button>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                    </tr>
+
                     </tbody>
                 </table>
 
@@ -69,43 +68,6 @@
             </div>
         </div>
     </div>
-    <div class="my-4 d-flex w-100 justify-content-between">
-        <h4>Recents - Sightings</h4>
-        <button class="btn btn btn-outline-dark">Add Sighting</button>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Health</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                    </tr>
-                    </tbody>
-                </table>
 
-            </div>
-        </div>
-    </div>
 {{/partial}}
 {{> dashboard.hbs}}

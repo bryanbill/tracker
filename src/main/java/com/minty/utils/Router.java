@@ -11,6 +11,9 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -25,7 +28,7 @@ public class Router extends RouterUtil {
         staticFileLocation("/public");
         get("/", (req, res) -> {
             checkLoggedIn(req, res);
-            return new ModelAndView(null, "dashboard.hbs");
+            return new ModelAndView(null, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/login", (req, res) -> {
@@ -49,8 +52,10 @@ public class Router extends RouterUtil {
 
         get("/animals", (req, res) -> {
             checkLoggedIn(req, res);
-            return animalsDao.getAnimals(connection);
-        });
+            Map<String, List<Animals>> model = new HashMap<>();
+            model.put("animals", animalsDao.getAnimals(connection));
+            return new ModelAndView(model, "animals.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/new/animal", (req, res) -> {
             checkLoggedIn(req, res);
@@ -81,9 +86,14 @@ public class Router extends RouterUtil {
             String username = req.queryParams("username");
             String password = req.queryParams("password");
             User user = userDao.login(connection, username, password);
-            req.session().attribute("user", user);
+            if (user != null) {
+                req.session().attribute("user", user);
+                res.redirect("/");
+                return "Logged in";
+            }
             res.redirect("/");
-            return "Logged in";
+            return "Login failed";
+
         });
 
         post("/register", (req, res) -> {
