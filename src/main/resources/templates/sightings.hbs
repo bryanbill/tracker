@@ -28,25 +28,32 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Health</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Animal Name</th>
+                        <th scope="col">Ranger</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@fat</td>
-                        <td>
-                            <button class="btn btn-outline-success">Edit</button>
-                            <button class="btn btn-outline-danger">Delete</button>
-                        </td>
-                    </tr>
+                    {{#if animals}}
+                        {{#each animals}}
+                            <tr>
+                                <td >{{id}}</td>
+                                <td>{{loc}}</td>
+                                <td>{{animalId}}</td>
+                                <td>{{rangerId}}</td>
+                                <td>
+                                    <button class="btn btn-outline-success">Edit</button>
+                                    <button class="btn btn-outline-danger">Delete</button>
+                                </td>
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No animals found</td>
+                        </tr>
+                    {{/if}}
 
                     </tbody>
                 </table>

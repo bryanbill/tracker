@@ -53,15 +53,17 @@ public class Router extends RouterUtil {
 
         get("/sightings", (req, res) -> {
             checkLoggedIn(req, res);
-            Map<String, List<Sightings>> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("sightings", sightingsDao.getSightings(connection));
+            model.put("user", User.getCurrentUser());
             return new ModelAndView(model, "sightings.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/animals", (req, res) -> {
             checkLoggedIn(req, res);
-            Map<String, List<Animals>> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("animals", animalsDao.getAnimals(connection));
+            model.put("user", User.getCurrentUser());
             return new ModelAndView(model, "animals.hbs");
         }, new HandlebarsTemplateEngine());
 

@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total Animals</h5>
-                    <p class="card-text">45K</p>
+                    <p class="card-text">0</p>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total Sightings</h5>
-                    <p class="card-text">45K</p>
+                    <p class="card-text">0</p>
                 </div>
             </div>
         </div>
@@ -42,20 +42,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                    </tr>
+                    {{#if animals}}
+                        {{#each animals}}
+                            <tr>
+                                <th scope="row">{{id}}</th>
+                                <td>{{animalName}}</td>
+                                <td>{{animalType}}</td>
+                                <td>{{age}}</td>
+                                <td>{{health}}</td>
+
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No animals found</td>
+                        </tr>
+                    {{/if}}
                     </tbody>
                 </table>
 
@@ -74,27 +77,28 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Health</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Animal Name</th>
+                        <th scope="col">Ranger Name</th>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                    </tr>
+                    {{#if sightings}}
+                        {{#each sightings}}
+                            <tr>
+                                <th scope="row">{{id}}</th>
+                                <td>{{loc}}</td>
+                                <td>{{animalId}}</td>
+                                <td>{{rangerId}}</td>
+                            </tr>
+
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5">No sightings found</td>
+                        </tr>
+                    {{/if}}
                     </tbody>
                 </table>
 
