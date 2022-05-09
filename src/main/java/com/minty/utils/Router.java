@@ -28,7 +28,13 @@ public class Router extends RouterUtil {
         staticFileLocation("/public");
         get("/", (req, res) -> {
             checkLoggedIn(req, res);
-            return new ModelAndView(null, "index.hbs");
+            Map<String, Object> model = new HashMap<>();
+            List<Sightings> sightings = sightingsDao.getSightings(connection);
+            List<Animals> animals = animalsDao.getAnimals(connection);
+            model.put("sightings", sightings);
+            model.put("animals", animals);
+            model.put("user", User.getCurrentUser());
+            return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/login", (req, res) -> {
@@ -47,8 +53,10 @@ public class Router extends RouterUtil {
 
         get("/sightings", (req, res) -> {
             checkLoggedIn(req, res);
-            return sightingsDao.getSightings(connection);
-        });
+            Map<String, List<Sightings>> model = new HashMap<>();
+            model.put("sightings", sightingsDao.getSightings(connection));
+            return new ModelAndView(model, "sightings.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/animals", (req, res) -> {
             checkLoggedIn(req, res);
