@@ -18,7 +18,8 @@
 <div class="h-100 w-100">
     {{#block "content"}}
     {{/block}}
-    <div class="modal fade" id="animalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="animalCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,34 +29,42 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/new/animal" method="post">
                         <div class="form-group">
                             <label for="animalName">Animal Name</label>
-                            <input type="text" class="form-control" id="animalName" placeholder="Enter Animal Name"/>
+                            <input type="text" class="form-control" name="animalName" id="animalName"
+                                   placeholder="Enter Animal Name" required/>
                         </div>
                         <div class="form-group">
                             <label for="animalType">Animal Type</label>
-                            <input type="text" class="form-control" id="animalType" placeholder="Enter Animal Type"/>
+                            <select type="text" class="form-control" name="animalType" id="animalType"
+                                    placeholder="Enter Animal Type" required>
+                                <option value="endangered">Endangered</option>
+                                <option value="threatened">Threatened</option>
+                                <option value="vulnerable">Vulnerable</option>
+                                <option value="nearby">Nearby</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="age">Age</label>
-                            <input type="text" class="form-control" id="age" placeholder="Enter Age"/>
+                            <input type="text" class="form-control" name="age" id="age" placeholder="Enter Age"
+                                   required/>
                         </div>
                         <div class="form-group">
                             <label for="health">Health</label>
-                            <input type="text" class="form-control" id="health" placeholder="Enter Health"/>
+                            <input type="text" class="form-control" name="health" id="health" placeholder="Enter Health"
+                                   required/>
                         </div>
+                        <button type="submit" class="btn btn-dark">Save changes</button>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="sightingCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="sightingCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -65,22 +74,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/new/sighting" method="post">
                         <div class="form-group">
-                            <label for="animalName">Animal Name</label>
-                            <input type="text" class="form-control" id="animalName" placeholder="Enter Animal Name"/>
+                            <label for="name">Animal Name</label>
+                            <select type="text" class="form-control" name="animalName" id="animalName" placeholder="Enter Animal Name" required>
+                                {{#if animals}}
+                                    {{#each animals}}
+                                        <option value="{{animalName}}">{{animalName}}</option>
+                                    {{/each}}
+                                {{else}}
+                                    <option value="">No Animals</option>
+                                {{/if}}
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="animalType">Location</label>
-                            <input type="text" class="form-control" id="animalType" placeholder="Enter Animal Type"/>
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" id="location" placeholder="Enter Location" required/>
                         </div>
-
+                        <button type="submit" class="btn btn-dark">Save</button>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>

@@ -35,8 +35,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{#if animals}}
-                        {{#each animals}}
+                    {{#if sightings}}
+                        {{#each sightings}}
                             <tr>
                                 <td >{{id}}</td>
                                 <td>{{loc}}</td>
@@ -50,7 +50,7 @@
                         {{/each}}
                     {{else}}
                         <tr>
-                            <td colspan="5">No animals found</td>
+                            <td colspan="5">No sighting found</td>
                         </tr>
                     {{/if}}
 

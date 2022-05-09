@@ -10,13 +10,9 @@ import org.sql2o.Connection;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 import static spark.SparkBase.staticFileLocation;
 
 public class Router extends RouterUtil {
@@ -69,43 +65,24 @@ public class Router extends RouterUtil {
             model.put("animals", animals);
             model.put("user", User.getCurrentUser());
             model.put("totalAnimals", animals.size());
+            List<Animals> s = new ArrayList<>();
             if (animals.size() > 0) {
                 // Filter animals where type is "endangered"
-                List<Animals> _s = null;
+
                 for (Animals a : animals) {
-                    if (!a.getAnimalType().equals("endangered"))
-                        _s.add(a);
+                    if (a.getAnimalType().equals("endangered")) {
+                        System.out.println(a.getAnimalName());
+                        s.add(a);
+                    }
                 }
-                model.put("endangered", _s.size());
-                model.put("ratio", (animals.size() / _s.size()) * 100);
+
             }
+            System.out.println(animals.size());
+            model.put("endangered", s.size());
+            model.put("ratio", (double) s.size() / animals.size());
             return new ModelAndView(model, "animals.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/new/animal", (req, res) -> {
-            checkLoggedIn(req, res);
-            return "New Animal";
-        });
-
-        get("/new/sighting", (req, res) -> {
-            checkLoggedIn(req, res);
-            return "New Sighting";
-        });
-
-        get("/ranger/:id", (req, res) -> {
-            checkLoggedIn(req, res);
-            return "Ranger";
-        });
-
-        get("/animal/:id", (req, res) -> {
-            checkLoggedIn(req, res);
-            return "Animal";
-        });
-
-        get("/sighting/:id", (req, res) -> {
-            checkLoggedIn(req, res);
-            return "Sighting";
-        });
 
         post("/login", (req, res) -> {
             String username = req.queryParams("username");
@@ -133,11 +110,11 @@ public class Router extends RouterUtil {
         });
         post("/new/animal", (req, res) -> {
             checkLoggedIn(req, res);
-            String animalName = req.queryParams("name");
+            String animalName = req.queryParams("animalName");
             String animalType = req.queryParams("animalType");
             String age = req.queryParams("age");
             String health = req.queryParams("health");
-            User user =  req.session().attribute("user");
+            User user = req.session().attribute("user");
             animalsDao.createAnimal(connection,
                     new Animals(animalName, animalType, age, health, user.getId(),
                             new Date()));
@@ -147,15 +124,30 @@ public class Router extends RouterUtil {
 
         post("/new/sighting", (req, res) -> {
             checkLoggedIn(req, res);
-            String animalId =req.queryParams("animalId");
-            String sightingLocation = req.queryParams("sightingLocation");
+            String animalId = req.queryParams("animalName");
+            String sightingLocation = req.queryParams("location");
             User user = (User) req.session().attribute("user");
-
             sightingsDao.createSighting(connection,
                     new Sightings(sightingLocation,
                             animalId, user.getFullName()));
             res.redirect("/sightings");
             return "New Sighting";
+        });
+
+        delete("/delete/animal/:id", (req, res) -> {
+            checkLoggedIn(req, res);
+            int id = Integer.parseInt(req.params("id"));
+            animalsDao.deleteAnimal(connection, id);
+            res.redirect("/animals");
+            return "Animal Deleted";
+        });
+
+        delete("/delete/sighting/:id", (req, res) -> {
+            checkLoggedIn(req, res);
+            int id = Integer.parseInt(req.params("id"));
+            sightingsDao.deleteSighting(connection, id);
+            res.redirect("/sightings");
+            return "Sighting Deleted";
         });
 
     }
